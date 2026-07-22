@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Nature Archive - Multiverse Control Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header Navigation -->
+    <header class="glass-card sticky top-0 z-50 px-6 py-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-600 rounded-lg shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-atom text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                        Cosmic Nature Archive
+                    </h1>
+                    <p class="text-xs text-slate-400">Multiverse Ecosystem Restoration & Management Center</p>
+                </div>
+            </div>
+
+            <!-- System Status & Auto-Update -->
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700 text-xs">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <span id="versionLabel" class="font-mono text-slate-300">Version: v2.5.0-Multiverse</span>
+                </div>
+                <button onclick="checkUpdates()" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-md transition duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-rotate"></i> Update
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-6 w-full space-y-8 my-auto">
+        
+        <!-- Summary Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-xl flex items-center gap-4">
+                <div class="p-3 bg-purple-500/20 text-purple-400 rounded-lg">
+                    <i class="fa-solid fa-globe text-2xl"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">Dimensions Tracked</div>
+                    <div class="text-xl font-bold text-slate-100">12 Sectors</div>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl flex items-center gap-4">
+                <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-lg">
+                    <i class="fa-solid fa-leaf text-2xl"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">Active Entities</div>
+                    <div class="text-xl font-bold text-slate-100" id="totalEntities">3 Entities</div>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl flex items-center gap-4">
+                <div class="p-3 bg-blue-500/20 text-blue-400 rounded-lg">
+                    <i class="fa-solid fa-heart-pulse text-2xl"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">Avg Restoration Index</div>
+                    <div class="text-xl font-bold text-emerald-400" id="avgHealth">67.3%</div>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl flex items-center gap-4">
+                <div class="p-3 bg-amber-500/20 text-amber-400 rounded-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">AI Diagnostics</div>
+                    <div class="text-xl font-bold text-amber-400">Ready</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Multiverse Ecosystem Entity Table -->
+            <div class="lg:col-span-2 glass-card p-6 rounded-2xl glow-effect space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                    <h2 class="text-lg font-bold flex items-center gap-2 text-blue-400">
+                        <i class="fa-solid fa-dna"></i> Multiverse Ecological Registry
+                    </h2>
+                    <button onclick="triggerPulse()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs px-4 py-2 rounded-lg font-medium shadow-md transition">
+                        <i class="fa-solid fa-bolt mr-1"></i> Trigger Restoration Pulse
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">Entity / Species</th>
+                                <th class="p-3">Type</th>
+                                <th class="p-3">Origin Dimension</th>
+                                <th class="p-3">Health Level</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entityTableBody" class="divide-y divide-slate-800">
+                            <!-- Rendered dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AI Analyzer Control Panel -->
+            <div class="glass-card p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold flex items-center gap-2 text-purple-400 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-brain"></i> AI Ecosystem Diagnostics
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-2">
+                        Utilize Gemini AI to diagnose ecological health and generate automated restoration plans across dimensions.
+                    </p>
+
+                    <div id="aiOutput" class="mt-4 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-xs leading-relaxed text-slate-300 h-48 overflow-y-auto">
+                        <p class="text-slate-500 italic text-center mt-12">Select an entity and click "Analyze AI" to begin diagnosis...</p>
+                    </div>
+                </div>
+
+                <div id="aiStatus" class="hidden text-xs text-purple-400 flex items-center gap-2">
+                    <i class="fa-solid fa-spinner animate-spin"></i> Connecting to cosmic intelligence engine...
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        <p>© 2026 Cosmic Nature Archive. Preserving & restoring natural ecosystems across dimensions.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Simulated dataset synchronized with the C++ Core System
+        let entities = [
+            { id: 1, name: "Nebula Panther", type: "Fauna", origin: "Dimension-C137", health: 65.0, status: "Needs Restoration" },
+            { id: 2, name: "Starlight Flora", type: "Flora", origin: "Dimension-Alpha", health: 92.0, status: "Thriving" },
+            { id: 3, name: "Chrono Crystal", type: "Elemental", origin: "Dimension-T9", health: 45.0, status: "Endangered" }
+        ];
+
+        // API Key initialization (provided automatically at runtime)
+        const apiKey = "";
+
+        // Render dataset to table
+        function renderEntities() {
+            const tbody = document.getElementById("entityTableBody");
+            tbody.innerHTML = "";
+
+            let totalHealth = 0;
+
+            entities.forEach(item => {
+                totalHealth += item.health;
+                const row = document.createElement("tr");
+                row.className = "hover:bg-slate-800/30 transition";
+
+                // Determine progress bar color
+                let healthColor = "bg-emerald-500";
+                if (item.health < 50) healthColor = "bg-red-500";
+                else if (item.health < 80) healthColor = "bg-amber-500";
+
+                row.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-200">${item.name}</td>
+                    <td class="p-3"><span class="px-2 py-1 bg-slate-800 rounded text-xs">${item.type}</span></td>
+                    <td class="p-3 font-mono text-xs text-blue-400">${item.origin}</td>
+                    <td class="p-3">
+                        <div class="w-full bg-slate-800 rounded-full h-2 max-w-[100px] inline-block mr-2">
+                            <div class="${healthColor} h-2 rounded-full transition-all duration-500" style="width: ${item.health}%"></div>
+                        </div>
+                        <span class="text-xs font-mono">${item.health.toFixed(1)}%</span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="runAIAnalysis('${item.name}', '${item.origin}', ${item.health})" class="bg-purple-600/80 hover:bg-purple-600 text-white text-xs px-2.5 py-1 rounded transition">
+                            <i class="fa-solid fa-microchip"></i> Analyze AI
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Update stats
+            document.getElementById("totalEntities").innerText = `${entities.length} Entities`;
+            const avg = totalHealth / entities.length;
+            document.getElementById("avgHealth").innerText = `${avg.toFixed(1)}%`;
+        }
+
+        // Emit cosmic restoration pulse
+        function triggerPulse() {
+            entities.forEach(item => {
+                if (item.health < 80) {
+                    item.health = Math.min(100, item.health + 15.5);
+                }
+            });
+            renderEntities();
+            
+            const aiOutput = document.getElementById("aiOutput");
+            aiOutput.innerHTML = `<p class="text-emerald-400 font-semibold">[SYSTEM]: Cosmic restoration pulse successfully emitted across all dimensions!</p>`;
+        }
+
+        // Auto-check for system updates
+        function checkUpdates() {
+            const versionLabel = document.getElementById("versionLabel");
+            versionLabel.innerText = "Checking...";
+            
+            setTimeout(() => {
+                versionLabel.innerText = "Version: v2.5.0-Multiverse (Latest)";
+                alert("Cosmic Nature Archive has automatically updated to the latest multiverse release!");
+            }, 800);
+        }
+
+        // AI Diagnosis using Gemini API
+        async function runAIAnalysis(name, origin, health) {
+            const aiOutput = document.getElementById("aiOutput");
+            const aiStatus = document.getElementById("aiStatus");
+
+            aiOutput.innerHTML = "";
+            aiStatus.classList.remove("hidden");
+
+            const prompt = `Analyze the ecological status of the entity '${name}' from dimension '${origin}' with a current health index of ${health}%. Provide 2 short, actionable restoration recommendations in English.`;
+            const systemPrompt = "You are a cosmic nature monitoring AI. Provide concise, scientific, sci-fi-themed responses in English.";
+
+            // Exponential Backoff Retry Mechanism
+            let delay = 1000;
+            let success = false;
+
+            for (let attempt = 0; attempt < 5; attempt++) {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+
+                    if (!response.ok) throw new Error("Connection failed");
+
+                    const data = await response.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received from AI.";
+
+                    aiOutput.innerHTML = `<div class="space-y-2">
+                        <p class="font-bold text-purple-300">AI Diagnosis For: ${name}</p>
+                        <p class="text-slate-300">${text.replace(/\n/g, '<br>')}</p>
+                    </div>`;
+                    
+                    success = true;
+                    break;
+                } catch (err) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+
+            aiStatus.classList.add("hidden");
+
+            if (!success) {
+                aiOutput.innerHTML = `<p class="text-red-400">Unable to connect to AI engine after multiple attempts. Please try again later.</p>`;
+            }
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderEntities();
+        };
+    </script>
+</body>
+</html>
+
